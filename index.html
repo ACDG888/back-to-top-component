@@ -3,13 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back to Top</title>
+    <title>Back to Top Button</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 2000px; /* Just for demonstration; adjust as needed */
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 20px; /* Position it at the bottom right */
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #007bff; /* Button color */
+            color: white; /* Text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            display: none; /* Initially hidden */
+            z-index: 1000; /* Make sure it’s on top of other elements */
+        }
+    </style>
 </head>
 <body>
-    <h1>Scroll down to see the Back to Top button</h1>
-    <p style="margin-top: 1000px;">This is a test page for the Back to Top component.</p>
-    <back-to-top></back-to-top>
 
-    <script src="back-to-top.js"></script>
+    <button id="backToTop">Back to Top</button>
+
+    <script>
+        // Show the button when scrolling down
+        window.onscroll = function() {
+            const button = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        };
+
+        // Scroll to the top when the button is clicked
+        document.getElementById('backToTop').onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+
 </body>
 </html>
