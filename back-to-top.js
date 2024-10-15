@@ -1,43 +1,25 @@
-class BackToTop extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `
-            <style>
-                #backToTop {
-                    position: fixed;
-                    bottom: 20px;
-                    right: 20px;
-                    background-color: #007bff;
-                    color: white;
-                    padding: 10px 15px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    display: none;
-                    z-index: 1000;
-                }
-            </style>
-            <div id="backToTop">Back to Top</div>
-        `;
-        this.button = this.shadowRoot.querySelector('#backToTop');
-        this.button.addEventListener('click', this.scrollToTop.bind(this));
-        window.addEventListener('scroll', this.toggleVisibility.bind(this));
-    }
+// back-to-top.js
 
-    toggleVisibility() {
-        if (window.scrollY > 200) {
-            this.button.style.display = 'block';
-        } else {
-            this.button.style.display = 'none';
-        }
-    }
+const button = document.createElement('button');
+button.innerHTML = 'Back to Top';
+button.style.position = 'fixed';
+button.style.bottom = '20px';
+button.style.right = '20px';
+button.style.display = 'none';
+button.style.zIndex = '1000';
 
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-}
+// Append the button to the body
+document.body.appendChild(button);
 
-customElements.define('back-to-top', BackToTop);
+window.onscroll = function() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+};
+
+// Use parent to scroll to the top of the main page
+button.onclick = function() {
+    parent.window.scrollTo({ top: 0, behavior: 'smooth' });
+};
