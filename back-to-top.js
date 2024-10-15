@@ -1,25 +1,38 @@
-// back-to-top.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to Top</title>
+    <style>
+        body {
+            margin: 0;
+            height: 2000px; /* Example height for scrolling */
+        }
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <button id="backToTop">Back to Top</button>
+    <script>
+        window.onscroll = function() {
+            const button = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        };
 
-const button = document.createElement('button');
-button.innerHTML = 'Back to Top';
-button.style.position = 'fixed';
-button.style.bottom = '20px';
-button.style.right = '20px';
-button.style.display = 'none';
-button.style.zIndex = '1000';
-
-// Append the button to the body
-document.body.appendChild(button);
-
-window.onscroll = function() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        button.style.display = 'block';
-    } else {
-        button.style.display = 'none';
-    }
-};
-
-// Use parent to scroll to the top of the main page
-button.onclick = function() {
-    parent.window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+        document.getElementById('backToTop').onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+</body>
+</html>
